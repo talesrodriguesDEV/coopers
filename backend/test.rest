@@ -1,0 +1,23 @@
+POST http://localhost:3001/
+Content-Type: application/json
+
+{
+  "email": "coopers@coopers.pro",
+  "password": "123456"
+}
+
+###
+
+GET http://localhost:3001/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZmMzU3MWI3MjIwNmRiZGY2Njc0YjciLCJpYXQiOjE2Nzc2Njk4NDJ9.lVjQlKYeiyY_iNFFbd_do5IWwLMO2StkzoHtWtzTunI
+
+###
+
+PUT http://localhost:3001/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZmMzU3MWI3MjIwNmRiZGY2Njc0YjciLCJpYXQiOjE2Nzc2Njk4NDJ9.lVjQlKYeiyY_iNFFbd_do5IWwLMO2StkzoHtWtzTunI
+Content-Type: application/json
+
+{
+  "key": "doneTasks",
+  "newTodos": ["Do laundry"]
+}
