@@ -26,4 +26,28 @@
   .label-input {
     @apply flex flex-col mb-4
   }
+
+  .list-container {
+    @apply pb-8 bg-white z-20 mt-20 flex flex-col items-center w-[180px] shadow-[0_4px_12px_0px_rgba(66,66,66,0.198454)]
+  }
+
+  .list-title {
+    @apply poppins font-semibold text-xl
+  }
+
+  .list-p {
+    @apply leading-tight text-sm montserrat
+  }
+
+  .list {
+    @apply w-4/5 montserrat text-xs my-8
+  }
+
+  .task {
+    @apply leading-6 flex mb-3 w-full
+  }
+
+  .erase-tasks {
+    @apply bg-black px-8 py-1 text-white montserrat font-semibold rounded-md
+  }
 }
