@@ -7,8 +7,8 @@ export default function Login() {
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
 
-  const { setDisplayLogin, displayLogin } = useContext(ToDoContext)
-  console.log(displayLogin)
+  const { setDisplayLogin } = useContext(ToDoContext)
+
   const closeLogin = () => {
     const app = document.querySelector('#app-container')
     if (app) app.className = ''
@@ -26,10 +26,11 @@ export default function Login() {
         localStorage.setItem('token', token)
         closeLogin()
       })
+      .catch(() => window.alert('Something went wrong.'))
   }
 
   return (
-    <div className='top-20 absolute bg-white w-11/12 left-4 z-20 flex flex-col items-center'>
+    <div className='top-20 absolute bg-white w-11/12 left-4 z-30 flex flex-col items-center'>
       <button className='self-end pr-4 pt-4 montserrat font-bold' onClick={closeLogin}>close</button>
       <div className='flex items-center justify-around mx-4 mt-10'>
         <img className='w-2/5' src={person} alt="Person pointing to screen" />

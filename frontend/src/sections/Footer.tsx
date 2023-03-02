@@ -5,7 +5,7 @@ import green from '../images/footer/green.png'
 
 export default function Footer() {
   return (
-    <footer className='mt-10'>
+    <footer className='mt-10 h-16'>
       <img className='absolute' src={footerbg} alt="Black big trapezium" />
       <div className='absolute text-xs text-white text-center w-full mt-3 montserrat'>
         <h1 className='font-bold'>Need help?</h1>

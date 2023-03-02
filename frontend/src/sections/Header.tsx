@@ -32,9 +32,9 @@ export default function Header() {
     <header className='flex justify-between items-center px-10 py-6'>
       <img className='w-1/3' src={logo} alt="Coopers' logo" />
       {displayExitButton ? (
-        <button className='bg-black text-white py-1 px-4 z-10 poppins' onClick={logout}>sair</button>
+        <button className='bg-black text-white py-1 px-4 z-10 poppins' onClick={logout}>logout</button>
       ) : (
-        <button className='bg-black text-white py-1 px-4 z-10 poppins' onClick={displayLoginForm}>entrar</button>
+        <button className='bg-black text-white py-1 px-4 z-10 poppins' onClick={displayLoginForm}>login</button>
       )}
       <img className='w-1/2 absolute top-14 right-0 z-0' src={v} alt="Background Decoration" />
     </header>
