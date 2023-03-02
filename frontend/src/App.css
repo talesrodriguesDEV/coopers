@@ -40,14 +40,18 @@
   }
 
   .list {
-    @apply w-4/5 montserrat text-xs my-8
+    @apply w-5/6 montserrat text-xs my-8
   }
 
   .task {
-    @apply leading-6 flex mb-3 w-full
+    @apply leading-6 flex mb-3 w-full justify-between
   }
 
   .erase-tasks {
     @apply bg-black px-8 py-1 text-white montserrat font-semibold rounded-md
+  }
+
+  .delete-task {
+    @apply text-[#999999] montserrat text-[0.5rem] font-bold
   }
 }

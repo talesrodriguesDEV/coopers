@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, KeyboardEvent, InputHTMLAttributes } from 'react'
+import React, { useContext, useEffect, KeyboardEvent } from 'react'
 
 import stripe from '../images/to-do/black-stripe.png'
 import bigTriangle from '../images/to-do/big-triangle.png'
@@ -9,16 +9,20 @@ import ToDoList from '../components/ToDoList'
 import DoneList from '../components/DoneList'
 
 interface IUser {
-  email: string,
+  name: string,
   password: string,
   todos: string[],
   doneTasks: string[]
 }
 
-export default function ToDoListSection() {
-  const { setToDos, setDoneTasks, toDos, doneTasks } = useContext(ToDoContext)
+interface IListsSectionProps {
+  displayLoginForm: () => void
+  currentToken: string
+  setCurrentToken: (token: string) => void
+}
 
-  const [currentToken, setCurrentToken] = useState('')
+export default function ListsSection({ displayLoginForm, currentToken, setCurrentToken }: IListsSectionProps) {
+  const { setToDos, setDoneTasks, toDos, doneTasks } = useContext(ToDoContext)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -36,18 +40,39 @@ export default function ToDoListSection() {
   }, [])
 
   const eraseTasks = (todos: boolean) => {
-    const key = todos ? 'todos' : 'doneTasks'
+    if (currentToken) {
+      const key = todos ? 'todos' : 'doneTasks'
 
-    fetch('http://localhost:3001/', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'Authorization': currentToken },
-      body: JSON.stringify({ key, newTodos: [] })
-    })
-      .then(response => {
-        console.log(response)
-        todos ? setToDos([]) : setDoneTasks([])
+      fetch('http://localhost:3001/', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': currentToken },
+        body: JSON.stringify({ key, newTodos: [] })
       })
-      .catch(() => window.alert('Something went wrong.'))
+        .then(() => todos ? setToDos([]) : setDoneTasks([]))
+        .catch(() => window.alert('Something went wrong.'))
+    }
+  }
+
+  const eraseTask = (todos: boolean, task: string) => {
+    if (currentToken) {
+      let key
+      let newTodos: string[]
+      if (todos) {
+        key = 'todos'
+        newTodos = toDos.filter(todo => todo !== task)
+      } else {
+        key = 'doneTasks'
+        newTodos = doneTasks.filter(doneTask => doneTask !== task)
+      }
+
+      fetch('http://localhost:3001/', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': currentToken },
+        body: JSON.stringify({ key, newTodos })
+      })
+        .then(() => todos ? setToDos(newTodos) : setDoneTasks(newTodos))
+        .catch(() => window.alert('Something went wrong.'))
+    }
   }
 
   const doTask = (task: string) => {
@@ -89,6 +114,10 @@ export default function ToDoListSection() {
     }
   }
 
+  const preventUnloggedUser = () => {
+    if (!currentToken) displayLoginForm()
+  }
+
   return (
     <section className='mt-4'>
       <img src={stripe} alt="Background Decoration" />
@@ -98,9 +127,9 @@ export default function ToDoListSection() {
       </div>
       <img className='-left-10 absolute mt-40' src={bigTriangle} alt="Big Triangle - Decoration" />
       <img className='-left-7 absolute mt-[14.2rem]' src={smallTriangle} alt="Small Triangle Decoration" />
-      <div className='flex justify-evenly'>
-        <ToDoList toDos={toDos} eraseTasks={eraseTasks} doTask={doTask} addNewToDo={addNewToDo} />
-        <DoneList doneTasks={doneTasks} eraseTasks={eraseTasks} />
+      <div className='flex justify-evenly' onClick={preventUnloggedUser}>
+        <ToDoList toDos={toDos} eraseTasks={eraseTasks} eraseTask={eraseTask} doTask={doTask} addNewToDo={addNewToDo} />
+        <DoneList doneTasks={doneTasks} eraseTasks={eraseTasks} eraseTask={eraseTask} />
       </div>
     </section>
   )

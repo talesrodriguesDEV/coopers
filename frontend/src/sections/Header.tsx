@@ -4,8 +4,13 @@ import logo from '../images/top/coopers.png'
 import v from '../images/top/big-v.png'
 import { ToDoContext } from '../context'
 
-export default function Header() {
-  const { setDisplayLogin, setToDos, setDoneTasks } = useContext(ToDoContext)
+interface IHeaderProps {
+  displayLoginForm: () => void
+  setCurrentToken: (token: string) => void
+}
+
+export default function Header({ displayLoginForm, setCurrentToken }: IHeaderProps) {
+  const { setToDos, setDoneTasks } = useContext(ToDoContext)
 
   const [displayExitButton, setDisplayExitButton] = useState(false)
 
@@ -15,16 +20,11 @@ export default function Header() {
     if (token) setDisplayExitButton(true)
   }, [])
 
-  const displayLoginForm = () => {
-    const app = document.querySelector('#app-container')
-    if (app) app.className = 'backdrop-brightness-[0.3]'
-    setDisplayLogin(true)
-  }
-
   const logout = () => {
     setDisplayExitButton(false)
     setToDos([])
     setDoneTasks([])
+    setCurrentToken('')
     localStorage.removeItem('token')
   }
 

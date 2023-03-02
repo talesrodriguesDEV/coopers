@@ -7,9 +7,10 @@ interface IToDoListProps {
   eraseTasks: (todos: boolean) => void
   doTask: (task: string) => void
   addNewToDo: (e: KeyboardEvent, newToDo: string) => void
+  eraseTask: (todos: boolean, todo: string) => void
 }
 
-export default function ToDoList({ toDos, eraseTasks, doTask, addNewToDo }: IToDoListProps) {
+export default function ToDoList({ toDos, eraseTasks, doTask, addNewToDo, eraseTask }: IToDoListProps) {
   const [newToDo, setNewToDo] = useState('')
 
   return (
@@ -20,14 +21,15 @@ export default function ToDoList({ toDos, eraseTasks, doTask, addNewToDo }: IToD
       <p className='list-p'>Start doing.</p>
       <ul className='list'>
         {toDos.map((todo, index) => (
-          <li className='task' key={index} onClick={() => doTask(todo)}>
-            <img className='mr-2' src={todoCircle} />
-            {todo}
+          <li className='task' key={index}>
+            <img className='mr-2' onClick={() => doTask(todo)} src={todoCircle} />
+            <span className='w-3/5'>{todo}</span>
+            <span className='delete-task' onClick={() => eraseTask(true, todo)}>delete</span>
           </li>
         ))}
         <li className='task'>
-          <img className='mr-2' src={todoCircle} />
-          <input id='new-task-input' className='w-3/4 px-1 placeholder:text-[#e38d3f]' placeholder='Adding an item...' onChange={({ target }) => setNewToDo(target.value)} onKeyUp={(e) => addNewToDo(e, newToDo)} />
+          <img className='' src={todoCircle} />
+          <input id='new-task-input' className='w-[78%] placeholder:text-[#e38d3f] focus:border-[#e38d3f]' placeholder='Add an item...' onChange={({ target }) => setNewToDo(target.value)} onKeyUp={(e) => addNewToDo(e, newToDo)} />
         </li>
       </ul>
       <button className='erase-tasks' onClick={() => eraseTasks(true)}>erase all</button>
