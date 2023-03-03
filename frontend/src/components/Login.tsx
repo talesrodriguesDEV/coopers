@@ -44,25 +44,25 @@ export default function Login({ setCurrentToken }: ILoginProps) {
   }
 
   return (
-    <div className='top-20 absolute bg-white w-11/12 left-4 z-30 flex flex-col items-center'>
-      <button className='self-end pr-4 pt-4 montserrat font-bold' onClick={closeLogin}>close</button>
-      <div className='flex items-center justify-around mx-4 mt-10'>
-        <img className='w-2/5' src={person} alt="Person pointing to screen" />
-        <div className='flex flex-col'>
-          <h1 className='montserrat text-2xl font-bold'>Sign in</h1>
-          <p className='text-[#4AC959] montserrat'>to access your list</p>
+    <div className=''>
+      <button className='' onClick={closeLogin}>close</button>
+      <div className=''>
+        <img className='' src={person} alt="Person pointing to screen" />
+        <div className=''>
+          <h1 className=''>Sign in</h1>
+          <p className=''>to access your list</p>
         </div>
       </div>
-      <form className='my-10 flex flex-col items-center' onSubmit={handleLogin}>
-        <div className='flex flex-col mb-6'>
+      <form className='' onSubmit={handleLogin}>
+        <div className=''>
           <label className='montserrat font-semibold'>User:</label>
-          <input required onChange={({ target }) => setUser(target.value)} className='login-input' />
+          <input required onChange={({ target }) => setUser(target.value)} className='' />
         </div>
-        <div className='flex flex-col mb-6'>
+        <div className=''>
           <label className='montserrat font-semibold'>Password:</label>
-          <input required type='password' onChange={({ target }) => setPassword(target.value)} className='login-input' />
+          <input required type='password' onChange={({ target }) => setPassword(target.value)} className='' />
         </div>
-        <button type="submit" className='bg-[#4AC959] px-12 py-2 text-white montserrat font-semibold'>Sign in</button>
+        <button type="submit" className=''>Sign in</button>
       </form>
     </div>
   )

@@ -32,7 +32,7 @@ function App() {
    }
 
    return (
-      <div id='app-container'>
+      <div id='app-container' className='text-xs'>
          {displayLogin && <Login setCurrentToken={setCurrentToken} />}
          <Header displayLoginForm={displayLoginForm} currentToken={currentToken} setCurrentToken={setCurrentToken} />
          <Organize toDoListsRef={toDoListsRef} />

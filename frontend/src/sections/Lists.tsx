@@ -98,15 +98,15 @@ export default function ListsSection({ displayLoginForm, currentToken, setCurren
   const preventUnloggedUser = () => !currentToken && displayLoginForm()
 
   return (
-    <section className='mt-4' id='lists-container' ref={toDoListsRef}>
-      <img src={stripe} alt="Background decorative black stripe" />
-      <div className='-mt-[5.5rem] z-10 text-white text-center'>
-        <h1 className='poppins font-semibold underline-offset-4 green-underline'>To-do List</h1>
-        <p className='text-xs montserrat mx-14'>Drag and drop to set your priorities, check when done and create what&#39;s new.</p>
+    <section className='' id='lists-container' ref={toDoListsRef}>
+      <img className='w-full' src={stripe} alt="Background decorative black stripe" />
+      <div className=''>
+        <h1 className=''>To-do List</h1>
+        <p className=''>Drag and drop to set your priorities, check when done and create what&#39;s new.</p>
       </div>
-      <img className='-left-10 absolute mt-40' src={bigTriangle} alt="Big Green Triangle - Decoration" />
-      <img className='-left-7 absolute mt-[14.2rem]' src={smallTriangle} alt="Small Green Triangle - Decoration" />
-      <div className='flex justify-evenly' onClick={preventUnloggedUser}>
+      <img className='' src={bigTriangle} alt="Big Green Triangle - Decoration" />
+      <img className='' src={smallTriangle} alt="Small Green Triangle - Decoration" />
+      <div className='' onClick={preventUnloggedUser}>
         <ToDoList toDos={toDos} eraseTasks={eraseTasks} eraseTask={eraseTask} doTask={doTask} addNewToDo={addNewToDo} />
         <DoneList doneTasks={doneTasks} eraseTasks={eraseTasks} eraseTask={eraseTask} />
       </div>

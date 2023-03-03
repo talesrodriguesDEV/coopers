@@ -25,12 +25,12 @@ export default function Header({ displayLoginForm, currentToken, setCurrentToken
   }
 
   return (
-    <header className='flex justify-between items-center px-10 py-6'>
-      <img className='w-1/3' src={logo} alt="Coopers' logo" />
+    <header className=''>
+      <img className='' src={logo} alt="Coopers' logo" />
       {displayExitButton ? (
-        <button className='log-button' onClick={logout}>logout</button>
+        <button className='' onClick={logout}>logout</button>
       ) : (
-        <button className='log-button' onClick={displayLoginForm}>login</button>
+        <button className='' onClick={displayLoginForm}>login</button>
       )}
     </header>
   )

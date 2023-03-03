@@ -6,7 +6,14 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        coopers: {
+          green: '#46BD62',
+          black: '#06152B'
+        }
+      }
+    },
   },
   plugins: [],
 }
