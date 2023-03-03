@@ -4,24 +4,17 @@ import stripe from '../images/to-do/black-stripe.png'
 import bigTriangle from '../images/to-do/big-triangle.png'
 import smallTriangle from '../images/to-do/small-triangle.png'
 
+import { IListsSectionProps, IUser } from '../interfaces'
+
 import { ToDoContext } from '../context'
+
 import ToDoList from '../components/ToDoList'
 import DoneList from '../components/DoneList'
 
-interface IUser {
-  name: string,
-  password: string,
-  todos: string[],
-  doneTasks: string[]
-}
+import { fetchApiPUT } from '../helpers'
+import { API_HOST, API_PORT, FULL_LIST_ERROR, GENERAL_ERROR } from '../utils'
 
-interface IListsSectionProps {
-  displayLoginForm: () => void
-  currentToken: string
-  setCurrentToken: (token: string) => void
-}
-
-export default function ListsSection({ displayLoginForm, currentToken, setCurrentToken }: IListsSectionProps) {
+export default function ListsSection({ displayLoginForm, currentToken, setCurrentToken, toDoListsRef }: IListsSectionProps) {
   const { setToDos, setDoneTasks, toDos, doneTasks } = useContext(ToDoContext)
 
   useEffect(() => {
@@ -30,103 +23,89 @@ export default function ListsSection({ displayLoginForm, currentToken, setCurren
     if (token) {
       setCurrentToken(token)
 
-      fetch('http://localhost:3001/', { headers: { 'Authorization': token } })
+      fetch(`http://${API_HOST}:${API_PORT}/`, { headers: { 'Authorization': token } })
         .then(response => response.json())
         .then((json: IUser) => {
-          setToDos(json.todos)
+          setToDos(json.toDos)
           setDoneTasks(json.doneTasks)
         })
+        .catch(() => window.alert(GENERAL_ERROR))
     }
-  }, [])
+  }, [currentToken])
 
-  const eraseTasks = (todos: boolean) => {
+  const eraseTasks = (areToDos: boolean) => {
     if (currentToken) {
-      const key = todos ? 'todos' : 'doneTasks'
+      const key = areToDos ? 'toDos' : 'doneTasks'
 
-      fetch('http://localhost:3001/', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'Authorization': currentToken },
-        body: JSON.stringify({ key, newTodos: [] })
-      })
-        .then(() => todos ? setToDos([]) : setDoneTasks([]))
-        .catch(() => window.alert('Something went wrong.'))
+      fetchApiPUT(currentToken, key, [])
+        .then(() => areToDos ? setToDos([]) : setDoneTasks([]))
+        .catch(() => window.alert(GENERAL_ERROR))
     }
   }
 
-  const eraseTask = (todos: boolean, task: string) => {
+  const eraseTask = (areToDos: boolean, task: string) => {
     if (currentToken) {
       let key
-      let newTodos: string[]
-      if (todos) {
-        key = 'todos'
-        newTodos = toDos.filter(todo => todo !== task)
+      let newToDos: string[]
+
+      if (areToDos) {
+        key = 'toDos'
+        newToDos = toDos.filter(toDo => toDo !== task)
       } else {
         key = 'doneTasks'
-        newTodos = doneTasks.filter(doneTask => doneTask !== task)
+        newToDos = doneTasks.filter(doneTask => doneTask !== task)
       }
 
-      fetch('http://localhost:3001/', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'Authorization': currentToken },
-        body: JSON.stringify({ key, newTodos })
-      })
-        .then(() => todos ? setToDos(newTodos) : setDoneTasks(newTodos))
-        .catch(() => window.alert('Something went wrong.'))
+      fetchApiPUT(currentToken, key, newToDos)
+        .then(() => areToDos ? setToDos(newToDos) : setDoneTasks(newToDos))
+        .catch(() => window.alert(GENERAL_ERROR))
     }
   }
 
   const doTask = (task: string) => {
-    const newTodos = toDos.filter(todo => todo !== task)
+    if (doneTasks.length > 4) {
+      window.alert(FULL_LIST_ERROR)
+      return
+    }
+
+    const newToDos = toDos.filter(toDo => toDo !== task)
     const newDoneTasks = [...doneTasks, task]
 
-    fetch('http://localhost:3001/', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'Authorization': currentToken },
-      body: JSON.stringify({ key: 'todos', newTodos })
-    })
-      .then(() => setToDos(newTodos))
-      .catch(() => window.alert('Something went wrong.'))
+    fetchApiPUT(currentToken, 'toDos', newToDos)
+      .then(() => setToDos(newToDos))
+      .catch(() => window.alert(GENERAL_ERROR))
 
-    fetch('http://localhost:3001/', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'Authorization': currentToken },
-      body: JSON.stringify({ key: 'doneTasks', newTodos: newDoneTasks })
-    })
+    fetchApiPUT(currentToken, 'doneTasks', newDoneTasks)
       .then(() => setDoneTasks(newDoneTasks))
-      .catch(() => window.alert('Something went wrong.'))
+      .catch(() => window.alert(GENERAL_ERROR))
   }
 
   const addNewToDo = (e: KeyboardEvent, newToDo: string) => {
-    if (e.key === 'Enter') {
-      const newTodos = [...toDos, newToDo]
+    if (toDos.length > 4) window.alert(FULL_LIST_ERROR)
+    else if (e.key === 'Enter') {
+      const newToDos = [...toDos, newToDo]
 
-      fetch('http://localhost:3001/', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'Authorization': currentToken },
-        body: JSON.stringify({ key: 'todos', newTodos })
-      })
+      fetchApiPUT(currentToken, 'toDos', newToDos)
         .then(() => {
-          setToDos(newTodos)
+          setToDos(newToDos)
           const input: HTMLInputElement | null = document.querySelector('#new-task-input')
           if (input) input.value = ''
         })
-        .catch(() => window.alert('Something went wrong.'))
+        .catch(() => window.alert(GENERAL_ERROR))
     }
   }
 
-  const preventUnloggedUser = () => {
-    if (!currentToken) displayLoginForm()
-  }
+  const preventUnloggedUser = () => !currentToken && displayLoginForm()
 
   return (
-    <section className='mt-4'>
-      <img src={stripe} alt="Background Decoration" />
+    <section className='mt-4' id='lists-container' ref={toDoListsRef}>
+      <img src={stripe} alt="Background decorative black stripe" />
       <div className='-mt-[5.5rem] z-10 text-white text-center'>
         <h1 className='poppins font-semibold underline-offset-4 green-underline'>To-do List</h1>
-        <p className='text-xs montserrat mx-14'>Drag and drop to set your  priorities, check when done and create what&#39;s new.</p>
+        <p className='text-xs montserrat mx-14'>Drag and drop to set your priorities, check when done and create what&#39;s new.</p>
       </div>
-      <img className='-left-10 absolute mt-40' src={bigTriangle} alt="Big Triangle - Decoration" />
-      <img className='-left-7 absolute mt-[14.2rem]' src={smallTriangle} alt="Small Triangle Decoration" />
+      <img className='-left-10 absolute mt-40' src={bigTriangle} alt="Big Green Triangle - Decoration" />
+      <img className='-left-7 absolute mt-[14.2rem]' src={smallTriangle} alt="Small Green Triangle - Decoration" />
       <div className='flex justify-evenly' onClick={preventUnloggedUser}>
         <ToDoList toDos={toDos} eraseTasks={eraseTasks} eraseTask={eraseTask} doTask={doTask} addNewToDo={addNewToDo} />
         <DoneList doneTasks={doneTasks} eraseTasks={eraseTasks} eraseTask={eraseTask} />

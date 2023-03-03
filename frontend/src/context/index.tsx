@@ -1,19 +1,8 @@
-import React, { createContext, ReactNode, useState } from 'react'
+import React, { createContext, useState } from 'react'
 
-export interface IContextValueType {
-  displayLogin: boolean
-  setDisplayLogin: (display: boolean) => void
-  toDos: string[]
-  setToDos: (toDos: string[]) => void
-  doneTasks: string[]
-  setDoneTasks: (doneTasks: string[]) => void
-}
+import { IContextValueType, IToDoProviderProps } from '../interfaces'
 
 export const ToDoContext = createContext<IContextValueType>({} as IContextValueType)
-
-interface IToDoProviderProps {
-  children: ReactNode
-}
 
 export function ToDoProvider({ children }: IToDoProviderProps) {
   const [displayLogin, setDisplayLogin] = useState(false)

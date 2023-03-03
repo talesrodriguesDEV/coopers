@@ -2,7 +2,7 @@ import pic1 from '../images/good-things/pic1.png'
 import pic2 from '../images/good-things/pic2.png'
 import pic3 from '../images/good-things/pic3.png'
 
-const goodThings = [
+export const goodThings = [
   {
     picture: pic1,
     alt: 'Two guys smiling and staring at the notebook.',
@@ -20,4 +20,10 @@ const goodThings = [
   }
 ]
 
-export default goodThings
+export const FULL_LIST_ERROR = 'There can not be more than five tasks per list at the same time.'
+
+export const GENERAL_ERROR = 'Something went wrong.'
+
+export const API_HOST = '192.168.0.13'
+
+export const API_PORT = 3001

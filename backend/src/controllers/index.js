@@ -3,17 +3,17 @@ const { addUser, findUserById, findUserByEmail, updateUser } = require('../datab
 const jwt = require('jsonwebtoken')
 
 const postUser = async (req, res) => {
-  const { email, password } = req.body
+  const { name, password } = req.body
 
-  const user = await findUserByEmail(email)
+  const user = await findUserByEmail(name)
 
   if (user && user.password === password) {
     const token = jwt.sign({ _id: user._id }, 'jwt_secret')
 
-    return res.status(200).json({ message: 'Login was sucessfully.', token })
+    return res.status(200).json({ message: 'Login was successfull.', token })
   }
 
-  const { _id } = await addUser(email, password)
+  const { _id } = await addUser(name, password)
 
   const token = jwt.sign({ _id }, 'jwt_secret')
 
@@ -27,9 +27,9 @@ const getUser = async (req, res) => {
 }
 
 const putUser = async (req, res) => {
-  const { key, newTodos } = req.body
+  const { key, newToDos } = req.body
 
-  await updateUser(req.id, key, newTodos)
+  await updateUser(req.id, key, newToDos)
 
   res.status(200).json({ message: 'User updated successfully.' })
 }

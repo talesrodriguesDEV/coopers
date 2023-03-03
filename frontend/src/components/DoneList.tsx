@@ -2,19 +2,17 @@ import React from 'react'
 
 import doneCircle from '../images/to-do/done-circle.png'
 
-interface IDoneListProps {
-  doneTasks: string[]
-  eraseTasks: (todos: boolean) => void
-  eraseTask: (todos: boolean, task: string) => void
-}
+import { IDoneListProps } from '../interfaces'
 
-export default function DoneList({doneTasks, eraseTasks, eraseTask}: IDoneListProps) {
+export default function DoneList({ doneTasks, eraseTasks, eraseTask }: IDoneListProps) {
   return (
-    <div className='list-container'>
-      <div className='bg-[#4AC959] py-2 w-full' />
-      <h2 className='list-title'>Done</h2>
-      <p className='list-p'>Congratulations!</p>
-      <p className='list-p font-bold'>You have done {doneTasks.length} task(s)</p>
+    <div className='list-container justify-between'>
+      <div className='w-full flex flex-col items-center'>
+        <div className='bg-[#4AC959] py-2 w-full' />
+        <h2 className='list-title'>Done</h2>
+        <p className='list-p'>Congratulations!</p>
+        <p className='list-p font-bold'>You have done {doneTasks.length} task(s)</p>
+      </div>
       <ul className='list'>
         {doneTasks.map((task, index) => (
           <li className='task' key={index}>

@@ -32,7 +32,7 @@
   }
 
   .list-title {
-    @apply poppins font-semibold text-xl
+    @apply poppins font-semibold text-xl leading-8
   }
 
   .list-p {
@@ -53,5 +53,17 @@
 
   .delete-task {
     @apply text-[#999999] montserrat text-[0.5rem] font-bold
+  }
+
+  .good-things-card {
+    @apply w-3/4 h-[350px] absolute z-10 mt-12 left-16 bg-white rounded-xl overflow-hidden drop-shadow-[8px_8px_24px_rgba(12,41,208,0.16)]
+  }
+
+  .log-button {
+    @apply bg-black text-white py-1 px-4 z-10 poppins
+  }
+
+  .login-input {
+    @apply border border-[#959595] rounded-[0.2rem]
   }
 }

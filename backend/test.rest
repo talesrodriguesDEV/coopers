@@ -2,22 +2,22 @@ POST http://localhost:3001/
 Content-Type: application/json
 
 {
-  "email": "coopers@coopers.pro",
+  "name": "Joe Doe",
   "password": "123456"
 }
 
 ###
 
 GET http://localhost:3001/
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZmMzU3MWI3MjIwNmRiZGY2Njc0YjciLCJpYXQiOjE2Nzc2Njk4NDJ9.lVjQlKYeiyY_iNFFbd_do5IWwLMO2StkzoHtWtzTunI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDAyNGEyNzk0NDE3MDkzMTQ0ZTcyMGYiLCJpYXQiOjE2Nzc4NzE2NjV9.E5xj4VhkvYKPfiZI_lbjd9r9H73p7SpLthZkU2w5-tM
 
 ###
 
 PUT http://localhost:3001/
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZmMzU3MWI3MjIwNmRiZGY2Njc0YjciLCJpYXQiOjE2Nzc2Njk4NDJ9.lVjQlKYeiyY_iNFFbd_do5IWwLMO2StkzoHtWtzTunI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDAyNGEyNzk0NDE3MDkzMTQ0ZTcyMGYiLCJpYXQiOjE2Nzc4NzE2NjV9.E5xj4VhkvYKPfiZI_lbjd9r9H73p7SpLthZkU2w5-tM
 Content-Type: application/json
 
 {
-  "key": "doneTasks",
-  "newTodos": ["Do laundry"]
+  "key": "toDos",
+  "newToDos": ["Do laundry"]
 }

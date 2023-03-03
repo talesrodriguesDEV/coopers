@@ -5,6 +5,6 @@ module.exports = () => {
 
   const db = mongoose.connection
 
-  db.once('open', () => console.log('Connected to MongoDB'))
+  db.once('open', () => console.log('Connected to MongoDB.'))
   db.on('error', (err) => console.log(err))
 }

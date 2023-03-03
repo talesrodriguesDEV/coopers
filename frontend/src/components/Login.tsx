@@ -1,9 +1,14 @@
-import React, { useContext, useState } from 'react'
-import { ToDoContext } from '../context'
+import React, { FormEvent, useContext, useState } from 'react'
 
 import person from '../images/login/person.png'
 
-export default function Login() {
+import { ILoginProps } from '../interfaces'
+
+import { ToDoContext } from '../context'
+
+import { API_HOST, API_PORT, GENERAL_ERROR } from '../utils'
+
+export default function Login({ setCurrentToken }: ILoginProps) {
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
 
@@ -11,22 +16,31 @@ export default function Login() {
 
   const closeLogin = () => {
     const app = document.querySelector('#app-container')
-    if (app) app.className = ''
+    const lists = document.querySelector('#lists-container')
+
+    if (app && lists) {
+      app.className = ''
+      lists.classList.remove('brightness-[0.3]')
+    }
+
     setDisplayLogin(false)
   }
 
-  const handleLogin = () => {
-    fetch('http://localhost:3001/', {
+  const handleLogin = (e: FormEvent) => {
+    e.preventDefault()
+
+    fetch(`http://${API_HOST}:${API_PORT}/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: user, password })
+      body: JSON.stringify({ name: user, password })
     })
       .then(response => response.json())
       .then(({ token }) => {
         localStorage.setItem('token', token)
+        setCurrentToken(token)
         closeLogin()
       })
-      .catch(() => window.alert('Something went wrong.'))
+      .catch(() => window.alert(GENERAL_ERROR))
   }
 
   return (
@@ -42,11 +56,11 @@ export default function Login() {
       <form className='my-10 flex flex-col items-center' onSubmit={handleLogin}>
         <div className='flex flex-col mb-6'>
           <label className='montserrat font-semibold'>User:</label>
-          <input onChange={({ target }) => setUser(target.value)} className='border border-[#959595] rounded-[0.2rem]' />
+          <input required onChange={({ target }) => setUser(target.value)} className='login-input' />
         </div>
         <div className='flex flex-col mb-6'>
           <label className='montserrat font-semibold'>Password:</label>
-          <input onChange={({ target }) => setPassword(target.value)} className='border border-[#959595] rounded-[0.2rem]' />
+          <input required type='password' onChange={({ target }) => setPassword(target.value)} className='login-input' />
         </div>
         <button type="submit" className='bg-[#4AC959] px-12 py-2 text-white montserrat font-semibold'>Sign in</button>
       </form>

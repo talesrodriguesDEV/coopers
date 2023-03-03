@@ -6,8 +6,8 @@ const authenticateLogin = (req, res, next) => {
   try {
     const { _id } = jwt.verify(token, 'jwt_secret')
     req.id = _id
-  } catch (err) {
-    return res.status(401).json({ message: 'Invalid token' })
+  } catch (_err) {
+    return res.status(401).json({ message: 'Invalid token.' })
   }
 
   next()
