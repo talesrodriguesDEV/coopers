@@ -10,7 +10,9 @@ module.exports = {
       colors: {
         coopers: {
           green: '#46BD62',
-          black: '#06152B'
+          black: '#06152B',
+          gray: '#9499B3',
+          orange: '#E88D39'
         }
       }
     },

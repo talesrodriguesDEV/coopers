@@ -44,25 +44,25 @@ export default function Login({ setCurrentToken }: ILoginProps) {
   }
 
   return (
-    <div className=''>
-      <button className='' onClick={closeLogin}>close</button>
-      <div className=''>
-        <img className='' src={person} alt="Person pointing to screen" />
-        <div className=''>
-          <h1 className=''>Sign in</h1>
-          <p className=''>to access your list</p>
+    <div className='bg-white absolute z-20 mt-6 w-[90%] ml-[5%] flex flex-col items-center montserrat'>
+      <button className='self-end pr-2 pt-2 font-bold' onClick={closeLogin}>close</button>
+      <div className='flex justify-evenly items-center'>
+        <img className='w-2/5' src={person} alt="Person pointing to screen" />
+        <div>
+          <h1 className='font-bold text-2xl leading-none'>Sign in</h1>
+          <p className='text-coopers-green'>to access your list</p>
         </div>
       </div>
-      <form className='' onSubmit={handleLogin}>
-        <div className=''>
-          <label className='montserrat font-semibold'>User:</label>
-          <input required onChange={({ target }) => setUser(target.value)} className='' />
+      <form className='flex flex-col items-center w-2/3 my-10' onSubmit={handleLogin}>
+        <div className='flex flex-col mb-5'>
+          <label className='font-semibold'>User:</label>
+          <input required onChange={({ target }) => setUser(target.value)} className='p-1 rounded border border-coopers-gray' />
         </div>
-        <div className=''>
-          <label className='montserrat font-semibold'>Password:</label>
-          <input required type='password' onChange={({ target }) => setPassword(target.value)} className='' />
+        <div className='flex flex-col mb-10'>
+          <label className='font-semibold'>Password:</label>
+          <input required type='password' onChange={({ target }) => setPassword(target.value)} className='p-1 rounded border border-coopers-gray' />
         </div>
-        <button type="submit" className=''>Sign in</button>
+        <button type="submit" className='bg-coopers-green text-white font-bold w-2/3 py-1'>Sign in</button>
       </form>
     </div>
   )

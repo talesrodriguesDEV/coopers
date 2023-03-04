@@ -18,7 +18,7 @@ export default function GetInTouch() {
   }
 
   return (
-    <section className='flex flex-col items-center my-10'>
+    <section className='flex flex-col items-center mb-10'>
       <div className='w-full flex justify-center items-center relative top-24'>
         <div className='bg-coopers-green px-4 -ml-4 py-2' />
         <img className='rounded-full' src={tatiana} alt="Tatiana" />

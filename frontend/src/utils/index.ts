@@ -11,7 +11,7 @@ export const goodThings = [
   {
     picture: pic2,
     alt: 'Man painting.',
-    text: 'Mark one activity as done makes your brain understandsthe power of doing.'
+    text: 'Mark one activity as done makes your brain understands the power of doing.'
   },
   {
     picture: pic3,

@@ -2,7 +2,6 @@ import React, { useContext, useRef, useState } from 'react'
 import './App.css'
 
 import Header from './sections/Header'
-import Organize from './sections/Organize'
 import Lists from './sections/Lists'
 import GoodThings from './sections/GoodThings'
 import GetInTouch from './sections/GetInTouch'
@@ -34,8 +33,12 @@ function App() {
    return (
       <div id='app-container' className='text-xs'>
          {displayLogin && <Login setCurrentToken={setCurrentToken} />}
-         <Header displayLoginForm={displayLoginForm} currentToken={currentToken} setCurrentToken={setCurrentToken} />
-         <Organize toDoListsRef={toDoListsRef} />
+         <Header
+            displayLoginForm={displayLoginForm}
+            currentToken={currentToken}
+            setCurrentToken={setCurrentToken}
+            toDoListsRef={toDoListsRef}
+         />
          <Lists
             displayLoginForm={displayLoginForm}
             currentToken={currentToken}

@@ -33,7 +33,7 @@ export default function ListsSection({ displayLoginForm, currentToken, setCurren
     }
   }, [currentToken])
 
-  const eraseTasks = (areToDos: boolean) => {
+  const eraseAllTasks = (areToDos: boolean) => {
     if (currentToken) {
       const key = areToDos ? 'toDos' : 'doneTasks'
 
@@ -98,17 +98,21 @@ export default function ListsSection({ displayLoginForm, currentToken, setCurren
   const preventUnloggedUser = () => !currentToken && displayLoginForm()
 
   return (
-    <section className='' id='lists-container' ref={toDoListsRef}>
-      <img className='w-full' src={stripe} alt="Background decorative black stripe" />
-      <div className=''>
-        <h1 className=''>To-do List</h1>
-        <p className=''>Drag and drop to set your priorities, check when done and create what&#39;s new.</p>
+    <section className='mt-8 h-fit' id='lists-container' ref={toDoListsRef}>
+      <div className='flex items-center justify-center'>
+        <img className='w-full absolute' src={stripe} alt="Background decorative black stripe" />
+        <div className='absolute text-white flex flex-col items-center'>
+          <h1 className='poppins text-xl green-underline mb-2 -mt-1.5'>To-do List</h1>
+          <p className='montserrat text-center'>Drag and drop to set your priorities, check <br /> when done and create what&#39;s new.</p>
+        </div>
       </div>
-      <img className='' src={bigTriangle} alt="Big Green Triangle - Decoration" />
-      <img className='' src={smallTriangle} alt="Small Green Triangle - Decoration" />
-      <div className='' onClick={preventUnloggedUser}>
-        <ToDoList toDos={toDos} eraseTasks={eraseTasks} eraseTask={eraseTask} doTask={doTask} addNewToDo={addNewToDo} />
-        <DoneList doneTasks={doneTasks} eraseTasks={eraseTasks} eraseTask={eraseTask} />
+      <div className='flex justify-evenly mt-32' onClick={preventUnloggedUser}>
+        <ToDoList toDos={toDos} eraseAllTasks={eraseAllTasks} eraseTask={eraseTask} doTask={doTask} addNewToDo={addNewToDo} />
+        <DoneList doneTasks={doneTasks} eraseAllTasks={eraseAllTasks} eraseTask={eraseTask} />
+      </div>
+      <div className='flex items-center h-[300px] relative -top-44'>
+        <img className='absolute left-0' src={bigTriangle} alt="Big Green Triangle - Decoration" />
+        <img className='absolute left-0 scale-125' src={smallTriangle} alt="Small Green Triangle - Decoration" />
       </div>
     </section>
   )

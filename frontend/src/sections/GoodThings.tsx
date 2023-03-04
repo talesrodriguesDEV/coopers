@@ -40,19 +40,19 @@ export default function GoodThings() {
   }, [isDragging])
 
   return (
-    <section className='border flex flex-col items-center'>
-      <div className='bg-coopers-green px-36 py-20 relative right-4 rounded' />
-      <h1 className='text-white absolute left-10'>good things</h1>
-      <div onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} className='border absolute'>
+    <section className='flex flex-col items-center montserrat -mt-32'>
+      <div className='bg-coopers-green px-36 py-28 relative right-4 rounded' />
+      <h1 className='text-white absolute left-12 mt-2 font-extrabold text-lg'>good things</h1>
+      <div onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} className='absolute w-3/4 mt-10 rounded-lg overflow-hidden drop-shadow-[8px_8px_24px_rgba(12,41,208,0.16)] bg-white'>
         <img className='w-[300px]' src={goodThings[currentIndex].picture} alt={goodThings[currentIndex].alt} />
-        <img className='' src={smallV} alt="Small Coopers logo' logo" />
-        <div className=''>
-          <h2 className=''>function</h2>
+        <img className='absolute bottom-[7.6rem] left-56' src={smallV} alt="Small Coopers' logo" />
+        <div className='h-[150px] flex flex-col justify-between p-4'>
+          <h2 className='text-coopers-gray border border-coopers-gray w-min py-1.5 px-2 rounded-full leading-none'>function</h2>
           <p className=''>{goodThings[currentIndex].text}</p>
-          <a href='' className=''>read more</a>
+          <a href='' className='text-coopers-green font-semibold'>read more</a>
         </div>
       </div>
-      <div className=''>
+      <div className='mt-40 flex w-1/4 justify-around'>
         {goodThings.map((_thing, index) => {
           if (index === currentIndex) return <img key={index} src={greenDot} alt="Green Dot" />
           return <img key={index} src={grayDot} alt="Gray Dot" onClick={() => setCurrentIndex(index)} />
