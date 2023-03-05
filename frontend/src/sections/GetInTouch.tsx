@@ -32,21 +32,21 @@ export default function GetInTouch() {
         </div>
         <div className='w-full px-4 flex flex-col'>
           <label className='mb-1'>Your name</label>
-          <input className='border border-coopers-black p-2 rounded-sm lg:rounded' placeholder='Type your name here' />
+          <input className='contact-form' placeholder='Type your name here' />
         </div>
         <div className='w-full px-4 flex justify-between my-2'>
           <div className='w-[45%]'>
             <label className='mb-1'>Email*</label>
-            <input className='border border-coopers-black p-2 rounded-sm lg:rounded w-full' type="email" required placeholder='example@example.com' />
+            <input className='contact-form w-full' type="email" required placeholder='example@example.com' />
           </div>
           <div className='w-[45%]'>
             <label className='mb-1'>Telephone*</label>
-            <input className='border border-coopers-black p-2 rounded-sm lg:rounded w-full' required placeholder='( ) _____-____' />
+            <input className='contact-form w-full' required placeholder='( ) _____-____' />
           </div>
         </div>
         <div className='w-full px-4 flex flex-col'>
           <label className='mb-1'>Message*</label>
-          <textarea className='border border-coopers-black p-2 rounded-sm lg:rounded' required placeholder='Type what you want to say to us' />
+          <textarea className='contact-form' required placeholder='Type what you want to say to us' />
         </div>
         <button className='bg-coopers-green text-white self-stretch mx-4 mt-5 py-1 rounded-sm' type='submit'>SEND NOW</button>
       </form>

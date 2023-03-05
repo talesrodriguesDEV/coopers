@@ -33,9 +33,9 @@ export default function Header({ displayLoginForm, currentToken, setCurrentToken
       <div className='flex justify-between items-center p-6 md:p-20 lg:p-0 lg:pt-20 lg:pb-40 lg:px-32 xl:pb-52'>
         <img className='w-1/3 max-w-[340px]' src={coopers} alt="Coopers' logo" />
         {displayExitButton ? (
-          <button className='bg-black text-white poppins py-1 px-4 z-20 xl:py-2 xl:px-10' onClick={logout}>logout</button>
+          <button className='login-button' onClick={logout}>logout</button>
         ) : (
-          <button className='bg-black text-white poppins py-1 px-4 z-20 xl:py-2 xl:px-10' onClick={displayLoginForm}>login</button>
+          <button className='login-button' onClick={displayLoginForm}>login</button>
         )}
       </div>
       <div className='absolute montserrat h-[250px] w-1/2 flex flex-col justify-around mx-6 md:mx-20 lg:mx-32'>

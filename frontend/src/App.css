@@ -60,4 +60,12 @@
   .delete-button {
     @apply montserrat text-coopers-gray text-[0.5rem] md:text-sm cursor-pointer
   }
+
+  .contact-form {
+    @apply border border-coopers-black p-2 rounded-sm lg:rounded
+  }
+
+  .login-button {
+    @apply bg-black text-white poppins py-1 px-4 z-20 xl:py-2 xl:px-10
+  }
 }
