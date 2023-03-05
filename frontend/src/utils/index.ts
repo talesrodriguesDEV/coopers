@@ -24,6 +24,6 @@ export const FULL_LIST_ERROR = 'There can not be more than five tasks per list a
 
 export const GENERAL_ERROR = 'Something went wrong.'
 
-export const API_HOST = '192.168.0.13'
+export const API_HOST = 'localhost'
 
 export const API_PORT = 3001
