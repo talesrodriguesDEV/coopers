@@ -17,7 +17,7 @@ export default function DoneList({ doneTasks, eraseAllTasks, eraseTask }: IDoneL
         {doneTasks.map((task, index) => (
           <li className='task' key={index}>
             <span className='flex items-center'>
-              <img className='mr-2' src={doneCircle} />
+              <img className='mr-2 xl:scale-125 xl:mr-6' src={doneCircle} />
               {task}
             </span>
             <span className='delete-button' onClick={() => eraseTask(false, task)}>delete</span>

@@ -41,21 +41,21 @@ export default function GoodThings() {
 
   return (
     <section className='flex flex-col items-center montserrat -mt-32'>
-      <div className='bg-coopers-green px-36 py-28 relative right-4 rounded' />
-      <h1 className='text-white absolute left-12 mt-2 font-extrabold text-lg'>good things</h1>
-      <div onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} className='absolute w-3/4 mt-10 rounded-lg overflow-hidden drop-shadow-[8px_8px_24px_rgba(12,41,208,0.16)] bg-white'>
-        <img className='w-[300px]' src={goodThings[currentIndex].picture} alt={goodThings[currentIndex].alt} />
-        <img className='absolute bottom-[7.6rem] left-56' src={smallV} alt="Small Coopers' logo" />
-        <div className='h-[150px] flex flex-col justify-between p-4'>
+      <div className='bg-coopers-green px-36 py-28 sm:px-[35%] sm:py-32 lg:py-64 relative right-4 sm:right-10 rounded lg:px-[360px]' />
+      <h1 className='text-white absolute left-12 sm:left-24 md:left-32 lg:left-1/4 xl:left-1/3 mt-2 font-extrabold text-lg lg:mt-6 lg:text-3xl'>good things</h1>
+      <div onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} className='absolute w-3/4 max-w-[700px] mt-10 lg:mt-20 rounded-lg overflow-hidden drop-shadow-[8px_8px_24px_rgba(12,41,208,0.16)] bg-white'>
+        <img className='w-[300px] sm:w-full max-w-[700px]' src={goodThings[currentIndex].picture} alt={goodThings[currentIndex].alt} />
+        <img className='absolute bottom-[7.6rem] left-56 md:left-[30rem] md:bottom-[10.8rem] xl:bottom-[17rem]' src={smallV} alt="Small Coopers' logo" />
+        <div className='h-[150px] md:h-[200px] xl:h-[300px] flex flex-col justify-between p-4'>
           <h2 className='text-coopers-gray border border-coopers-gray w-min py-1.5 px-2 rounded-full leading-none'>function</h2>
           <p className=''>{goodThings[currentIndex].text}</p>
           <a href='' className='text-coopers-green font-semibold'>read more</a>
         </div>
       </div>
-      <div className='mt-40 flex w-1/4 justify-around'>
+      <div className='mt-40 sm:mt-64 md:mt-96 lg:mt-40 xl:mt-72 flex w-1/4 max-w-[264px] justify-around'>
         {goodThings.map((_thing, index) => {
-          if (index === currentIndex) return <img key={index} src={greenDot} alt="Green Dot" />
-          return <img key={index} src={grayDot} alt="Gray Dot" onClick={() => setCurrentIndex(index)} />
+          if (index === currentIndex) return <img className='cursor-pointer' key={index} src={greenDot} alt="Green Dot" />
+          return <img className='cursor-pointer' key={index} src={grayDot} alt="Gray Dot" onClick={() => setCurrentIndex(index)} />
         })}
       </div>
     </section>

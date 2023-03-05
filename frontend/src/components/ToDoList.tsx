@@ -18,18 +18,18 @@ export default function ToDoList({ toDos, eraseAllTasks, doTask, addNewToDo, era
       <ul className='list'>
         {toDos.map((toDo, index) => (
           <li className='task' key={index}>
-            <span className='flex items-center'>
-              <img className='mr-2' onClick={() => doTask(toDo)} src={toDoCircle} />
+            <span className='flex items-center cursor-pointer'>
+              <img className='mr-2 xl:scale-125 xl:mr-6' onClick={() => doTask(toDo)} src={toDoCircle} />
               {toDo}
             </span>
             <span className='delete-button' onClick={() => eraseTask(true, toDo)}>delete</span>
           </li>
         ))}
         <li className='task'>
-          <img className='' src={toDoCircle} />
+          <img className='xl:scale-150' src={toDoCircle} />
           <input
             id='new-task-input'
-            className='w-4/5 p-1 placeholder:text-coopers-orange'
+            className='w-4/5 p-1 placeholder:text-coopers-orange md:w-[90%]'
             placeholder='Add an item...'
             onChange={({ target }) => setNewToDo(target.value)}
             onKeyUp={(e) => addNewToDo(e, newToDo)}

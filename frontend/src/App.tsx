@@ -23,7 +23,7 @@ function App() {
       const lists = document.querySelector('#lists-container')
 
       if (app && lists) {
-         app.className = 'backdrop-brightness-[0.3]'
+         app.classList.add('backdrop-brightness-[0.3]')
          lists.classList.add('brightness-[0.3]')
       }
 
@@ -31,7 +31,7 @@ function App() {
    }
 
    return (
-      <div id='app-container' className='text-xs'>
+      <div id='app-container' className='text-xs md:text-lg xl:text-3xl'>
          {displayLogin && <Login setCurrentToken={setCurrentToken} />}
          <Header
             displayLoginForm={displayLoginForm}

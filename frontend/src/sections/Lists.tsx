@@ -97,16 +97,18 @@ export default function ListsSection({ displayLoginForm, currentToken, setCurren
 
   const preventUnloggedUser = () => !currentToken && displayLoginForm()
 
+  const goToLogin = () => !currentToken && window.scroll(0, 0)
+
   return (
-    <section className='mt-8 h-fit' id='lists-container' ref={toDoListsRef}>
+    <section onClick={goToLogin} className='mt-8 sm:mt-40 md:mt-60 lg:mt-80 xl:mt-96 2xl:mt-[30rem] h-fit' id='lists-container' ref={toDoListsRef}>
       <div className='flex items-center justify-center'>
         <img className='w-full absolute' src={stripe} alt="Background decorative black stripe" />
         <div className='absolute text-white flex flex-col items-center'>
-          <h1 className='poppins text-xl green-underline mb-2 -mt-1.5'>To-do List</h1>
+          <h1 className='poppins text-xl md:text-4xl green-underline mb-2 lg:mb-10 -mt-1.5'>To-do List</h1>
           <p className='montserrat text-center'>Drag and drop to set your priorities, check <br /> when done and create what&#39;s new.</p>
         </div>
       </div>
-      <div className='flex justify-evenly mt-32' onClick={preventUnloggedUser}>
+      <div className='flex justify-evenly mt-32 lg:mt-60 xl:mt-80' onClick={preventUnloggedUser}>
         <ToDoList toDos={toDos} eraseAllTasks={eraseAllTasks} eraseTask={eraseTask} doTask={doTask} addNewToDo={addNewToDo} />
         <DoneList doneTasks={doneTasks} eraseAllTasks={eraseAllTasks} eraseTask={eraseTask} />
       </div>

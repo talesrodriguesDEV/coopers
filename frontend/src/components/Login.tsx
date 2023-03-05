@@ -19,7 +19,7 @@ export default function Login({ setCurrentToken }: ILoginProps) {
     const lists = document.querySelector('#lists-container')
 
     if (app && lists) {
-      app.className = ''
+      app.classList.remove('backdrop-brightness-[0.3]') 
       lists.classList.remove('brightness-[0.3]')
     }
 
@@ -44,7 +44,7 @@ export default function Login({ setCurrentToken }: ILoginProps) {
   }
 
   return (
-    <div className='bg-white absolute z-20 mt-6 w-[90%] ml-[5%] flex flex-col items-center montserrat'>
+    <div className='bg-white absolute z-30 mt-6 w-[90%] ml-[5%] lg:w-[70%] lg:ml-[15%] flex flex-col items-center montserrat'>
       <button className='self-end pr-2 pt-2 font-bold' onClick={closeLogin}>close</button>
       <div className='flex justify-evenly items-center'>
         <img className='w-2/5' src={person} alt="Person pointing to screen" />
@@ -54,15 +54,15 @@ export default function Login({ setCurrentToken }: ILoginProps) {
         </div>
       </div>
       <form className='flex flex-col items-center w-2/3 my-10' onSubmit={handleLogin}>
-        <div className='flex flex-col mb-5'>
+        <div className='flex flex-col lg:w-1/2 mb-5'>
           <label className='font-semibold'>User:</label>
           <input required onChange={({ target }) => setUser(target.value)} className='p-1 rounded border border-coopers-gray' />
         </div>
-        <div className='flex flex-col mb-10'>
+        <div className='flex flex-col lg:w-1/2 mb-10'>
           <label className='font-semibold'>Password:</label>
           <input required type='password' onChange={({ target }) => setPassword(target.value)} className='p-1 rounded border border-coopers-gray' />
         </div>
-        <button type="submit" className='bg-coopers-green text-white font-bold w-2/3 py-1'>Sign in</button>
+        <button type="submit" className='bg-coopers-green text-white font-bold w-2/3 lg:w-1/2 py-1'>Sign in</button>
       </form>
     </div>
   )
