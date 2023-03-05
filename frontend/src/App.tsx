@@ -8,6 +8,7 @@ import GetInTouch from './sections/GetInTouch'
 import Footer from './sections/Footer'
 
 import Login from './components/Login'
+import GoTop from './components/GoTop'
 
 import { ToDoContext } from './context'
 
@@ -48,6 +49,7 @@ function App() {
          <GoodThings />
          <GetInTouch />
          <Footer />
+         <GoTop />
       </div>
    )
 }
